@@ -9,10 +9,13 @@ public class PressKey : MonoBehaviour
     AudioClip clip;
     public Image touchedImage;
     IEnumerator touchCoroutine;
-    public void Awake()
+    public string type;
+    public static PressKey instance;
+    void Awake()
     {
+        instance = this;
         touchCoroutine = touchEffect();
-        clip = (AudioClip)Resources.Load(gameObject.name);
+        SetAudioClip(type);
 
         EventTrigger eventTrigger = gameObject.AddComponent<EventTrigger>();
 
@@ -22,9 +25,15 @@ public class PressKey : MonoBehaviour
         eventTrigger.triggers.Add(entry_PointerDown);
     }
 
+    public void SetAudioClip(string t)
+    {
+        clip = (AudioClip)Resources.Load(t + "/" + gameObject.name);
+    }
+
+
     void OnPointerDown(PointerEventData data)
     {
-        SoundManager.instance.PlaySound(clip);
+        Functions.instance.PlaySound(clip);
         StopCoroutine(touchCoroutine);
         touchCoroutine = touchEffect();
         StartCoroutine(touchCoroutine);
