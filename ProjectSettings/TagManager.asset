@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Keyboard
   - Key
+  - WordBox
+  - BitBox
   layers:
   - Default
   - TransparentFX

@@ -5,7 +5,6 @@ using UnityEngine;
 public class Audio : MonoBehaviour
 {
     AudioSource source;
-    // Start is called before the first frame update
     IEnumerator coroutine;
     
     private void Awake()
@@ -32,5 +31,6 @@ public class Audio : MonoBehaviour
             playTime -= Time.deltaTime;
             yield return null;
         }
+        source.volume = 0;
     }
 }
